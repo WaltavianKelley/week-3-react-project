@@ -1,5 +1,6 @@
-import {  useState ,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../services/supabaseClient';
+import '../Menu.css'
 
 function Menu() {
 
@@ -15,6 +16,7 @@ function Menu() {
                 console.error('Error fetching menu:', error);
             } else {
                 setMenuItems(data);
+                console.log(data);
             }
         };
         fetchMenuItems();
@@ -37,51 +39,79 @@ function Menu() {
     );
 
     return (
-        <div>
+        <>
 
-            <h1>Menu</h1>
 
-            <h2>Breakfast</h2>
+            <div className="menu-container">
 
-            {breakfastItems.map(item => (
-                <div key={item.id}>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p>${Number(item.price).toFixed(2)}</p>
+                <h1>Menu</h1>
+
+                <div className="menu-section">
+                    <h2>Breakfast</h2>
+
+                    <div className="menu-grid">
+
+                    {breakfastItems.map(item => (
+                        <div className="menu-card" key={item.id}>
+                            <img src={item.Image_url} alt={item.name} />
+                            <h3>{item.name}</h3>
+                            <p>{item.description}</p>
+                            <p className="price">
+                                ${Number(item.price).toFixed(2)}
+                            </p>
+                        </div>
+                    ))}
                 </div>
-            ))}
-
-            <h2>Lunch</h2>
-
-            {lunchItems.map(item => (
-                <div key={item.id}>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p>${Number(item.price).toFixed(2)}</p>
                 </div>
-            ))}
+                <h2>Lunch</h2>
 
-            <h2>Dinner</h2>
-
-            {dinnerItems.map(item => (
-                <div key={item.id}>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p>${Number(item.price).toFixed(2)}</p>
+                    <div className="menu-grid">
+                {lunchItems.map(item => (
+                    <div className="menu-card" key={item.id}>
+                         <img src={item.Image_url} alt={item.name} />
+                        <h3>{item.name}</h3>
+                        <p>{item.description}</p>
+                        <p className="price">
+                            ${Number(item.price).toFixed(2)}
+                        </p>
+                    </div>
+                    
+                ))}
                 </div>
-            ))}
 
-            <h2>Drinks</h2>
+                <h2>Dinner</h2>
+                    <div className="menu-grid">
 
-            {drinkItems.map(item => (
-                <div key={item.id}>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p>${Number(item.price).toFixed(2)}</p>
+                {dinnerItems.map(item => (
+                    <div className="menu-card" key={item.id}>
+                        <img src={item.Image_url} alt={item.name} />
+                        <h3>{item.name}</h3>
+                        <p>{item.description}</p>
+                        <p className="price">
+                            ${Number(item.price).toFixed(2)}
+                        </p>
+                    </div>
+                ))}
                 </div>
-            ))}
 
-        </div>
+                <h2>Drinks</h2>
+
+                <div className="menu-grid">
+
+                {drinkItems.map(item => (
+                    <div className="menu-card" key={item.id}>
+                         <img src={item.Image_url} alt={item.name} />
+                        <h3>{item.name}</h3>
+                        <p>{item.description}</p>
+                        <p className="price">
+                            ${Number(item.price).toFixed(2)}
+                        </p>
+                    </div>
+                ))}
+                </div>
+
+            </div>
+        </>
     )
 
 
